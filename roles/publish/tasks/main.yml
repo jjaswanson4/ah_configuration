@@ -11,6 +11,8 @@
   when:
     - ah_collection_list is not defined
     - __ah_collection_item.collection_local_path is not defined
+  environment:
+    GIT_SSL_NO_VERIFY: True
 
 - name: Copy local collection to working dir
   copy:
