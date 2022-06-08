@@ -9,7 +9,7 @@ license:
   - GPL-3.0-only
 namespace: jjaswanson4
 name: ah_configuration
-version: 0.6.2
+version: 0.8.0
 readme: README.md
 repository: https://github.com/jjaswanson4/ah_configuration
 issues: https://github.com/jjaswanson4/ah_configuration/issues
