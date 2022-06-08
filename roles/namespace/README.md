@@ -9,7 +9,7 @@ An Ansible Role to create Namespaces in Automation Hub.
 |`ah_username`|""|yes|Admin User on the Automation Hub or Galaxy Server.||
 |`ah_password`|""|yes|Automation Hub Admin User's password on the Automation Hub Server.  This should be stored in an Ansible Vault at vars/tower-secrets.yml or elsewhere and called from a parent playbook.||
 |`ah_token`|""|yes|Tower Admin User's token on the Automation Hub Server.  This should be stored in an Ansible Vault at or elsewhere and called from a parent playbook.||
-|`validate_certs`|`False`|no|Whether or not to validate the Ansible Automation Hub Server's SSL certificate.||
+|`ah_validate_certs`|`False`|no|Whether or not to validate the Ansible Automation Hub Server's SSL certificate.||
 |`ah_path_prefix`|""|no|API path used to access the api. Either galaxy, automation-hub, or custom||
 |`ah_namespaces`|`see below`|yes|Data structure describing your namespaces, described below.||
 
@@ -24,6 +24,20 @@ ah_configuration_namespace_secure_logging defaults to the value of ah_configurat
 |:---:|:---:|:---:|:---:|
 |`ah_configuration_namespace_secure_logging`|`False`|no|Whether or not to include the sensitive Namepsace role tasks in the log.  Set this value to `True` if you will be providing your sensitive values from elsewhere.|
 |`ah_configuration_secure_logging`|`False`|no|This variable enables secure logging as well, but is shared across multiple roles, see above.|
+
+
+### Asynchronous Retry Variables
+The following Variables set asynchronous retries for the role.
+If neither of the retries or delay or retries are set, they will default to their respective defaults.
+This allows for all items to be created, then checked that the task finishes successfully.
+This also speeds up the overall role.
+
+|Variable Name|Default Value|Required|Description|
+|:---:|:---:|:---:|:---:|
+|`ah_configuration_async_retries`|50|no|This variable sets the number of retries to attempt for the role globally.|
+|`ah_configuration_namespace_async_retries`|`ah_configuration_async_retries`|no|This variable sets the number of retries to attempt for the role.|
+|`ah_configuration_async_delay`|1|no|This sets the delay between retries for the role globally.|
+|`ah_configuration_namespace_async_delay`|`ah_configuration_async_delay`|no|This sets the delay between retries for the role.|
 
 
 ## Data Structure

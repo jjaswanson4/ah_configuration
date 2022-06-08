@@ -5,6 +5,54 @@ redhat_cop.ah_configuration Release Notes
 .. contents:: Topics
 
 
+v0.8.0
+======
+
+Minor Changes
+-------------
+
+- Changed default retries on async tasks in roles to 50
+
+Bugfixes
+--------
+
+- Fix issue where all roles had the wrong variable set and caused failures
+- Fixed issue with new variables not included in ee_repository role
+- Fixed issue with sync and index roles where a no_log variable was incorrect
+
+v0.7.0
+======
+
+Major Changes
+-------------
+
+- Added ability to add remote repositories in ah_ee_repository module.
+- Adds ah_ee_registry module
+- Adds ah_ee_registry_index module
+- Adds ah_ee_registry_sync module
+- Adds ee_registry role
+- Adds ee_registry_index role
+- Adds ee_registry_sync role
+- module ah_collection can now upload and delete collections
+
+Minor Changes
+-------------
+
+- Added group permissions for remote registry management - add_containerregistryremote, change_containerregistryremote, delete_containerregistryremote.
+- ah_hostname becomes an alias for ah_host in modules
+- ah_hostname is now the default option for roles, though ah_host remains an alias
+
+Breaking Changes / Porting Guide
+--------------------------------
+
+- Options for state in ah_ee_image and ah_ee_repository modules changed from 'updated' to 'present' as a bug fix.
+- module ah_collection_upload has been removed.
+
+New Modules
+-----------
+
+- redhat_cop.ah_configuration.ah_ee_registry - Manage private automation hub execution environment remote registries.
+
 v0.6.1
 ======
 

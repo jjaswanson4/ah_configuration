@@ -6,12 +6,13 @@ An Ansible Role to publish collections to Automation Hub or Galaxies.
 |Variable Name|Default Value|Required|Description|Example|
 |:---:|:---:|:---:|:---:|:---:|
 |`ah_host`|""|yes|URL to the Automation Hub or Galaxy Server. (alias: `ah_hostname`)|127.0.0.1|
-|`validate_certs`|`False`|no|Whether or not to validate the Ansible Tower Server's SSL certificate.||
+|`ah_validate_certs`|`False`|no|Whether or not to validate the Ansible Tower Server's SSL certificate.||
 |`ah_token`|""|no|Admin User's token on the Automation Hub Server.  This should be stored in an Ansible Vault at or elsewhere and called from a parent playbook.||
 |`ah_collections`|`see below`|no|Data structure describing your collections, mutually exclusive to ah_collection_list, described below.||
 |`ah_collection_list`|`list`|no|Data structure file paths to pre built collections, mutually exclusive with ah_collections.||
 |`ah_configuration_working_dir`|`/var/tmp`|no|The working directory where the built artifacts live, or where the artifacts will be built.||
 |`ah_auto_approve`|`False`|no|Whether the collection will be automatically approved in Automation Hub. This will only work if the account being used has correct privileges.||
+|`ah_overwrite_existing`|`True`|no|Whether the collection will be automatically overwrite an existing collection in Automation Hub. This will only work if the account being used has correct privileges.||
 
 ### Secure Logging Variables
 The following Variables compliment each other.
@@ -23,6 +24,20 @@ ah_configuration_publish_secure_logging defaults to the value of ah_configuratio
 |:---:|:---:|:---:|:---:|
 |`ah_configuration_publish_secure_logging`|`False`|no|Whether or not to include the sensitive publish collections role tasks in the log.  Set this value to `True` if you will be providing your sensitive values from elsewhere.|
 |`ah_configuration_secure_logging`|`False`|no|This variable enables secure logging as well, but is shared across multiple roles, see above.|
+
+
+### Asynchronous Retry Variables
+The following Variables set asynchronous retries for the role.
+If neither of the retries or delay or retries are set, they will default to their respective defaults.
+This allows for all items to be created, then checked that the task finishes successfully.
+This also speeds up the overall role.
+
+|Variable Name|Default Value|Required|Description|
+|:---:|:---:|:---:|:---:|
+|`ah_configuration_async_retries`|50|no|This variable sets the number of retries to attempt for the role globally.|
+|`ah_configuration_publish_async_retries`|`ah_configuration_async_retries`|no|This variable sets the number of retries to attempt for the role.|
+|`ah_configuration_async_delay`|1|no|This sets the delay between retries for the role globally.|
+|`ah_configuration_publish_async_delay`|`ah_configuration_async_delay`|no|This sets the delay between retries for the role.|
 
 
 ## Data Structure
